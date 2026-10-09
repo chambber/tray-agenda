@@ -64,10 +64,12 @@ not supported. Feed URLs are stored as plain text in Windhawk's settings, so tre
   `zoom.us`, Microsoft Teams).
 - Reminders use their own notification identity, so they appear as "Tray Agenda". The first time a reminder
   is about to be shown, the mod writes `HKCU\Software\Classes\AppUserModelId\TrayAgenda` (display name only),
-  and Windows adds `HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\TrayAgenda`. Both
-  are deleted when the mod is disabled or unloaded, and leftovers from an unclean exit are deleted at the next
-  start. Nothing is written if no reminder is ever shown. Per-app notification choices made in Windows Settings
-  are discarded together with those keys; use the mod's own *Reminder notifications* setting instead.
+  and Windows adds `HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\TrayAgenda`. Nothing
+  is written if no reminder is ever shown. Both keys are deleted when the mod is disabled or unloaded. Explorer
+  exiting (sign-out, shutdown, restart, crash) does not run that path, so after a session with a reminder the keys
+  stay until the mod next loads into Explorer (and for good if the mod or Windhawk is removed while the mod is not
+  loaded). For the same reason, per-app notification choices made in Windows Settings are reset at every sign-in or
+  Explorer restart; use the mod's own *Reminder notifications* setting instead.
 - *Sign out ...* in the popup removes that account's token and revokes it at Google.
 
 ## Implementation notes
