@@ -62,7 +62,12 @@ not supported. Feed URLs are stored as plain text in Windhawk's settings, so tre
   followed, which may lead to other HTTPS hosts). Nothing is sent until you configure an OAuth client and
   sign in, or add an ICS URL. Meeting links are shown only if they match a strict allowlist (Google Meet,
   `zoom.us`, Microsoft Teams).
-- Reminders are shown through File Explorer's notification entry, so the mod writes nothing to the registry.
+- Reminders use their own notification identity, so they appear as "Tray Agenda". The first time a reminder
+  is about to be shown, the mod writes `HKCU\Software\Classes\AppUserModelId\TrayAgenda` (display name only),
+  and Windows adds `HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\TrayAgenda`. Both
+  are deleted when the mod is disabled or unloaded, and leftovers from an unclean exit are deleted at the next
+  start. Nothing is written if no reminder is ever shown. Per-app notification choices made in Windows Settings
+  are discarded together with those keys; use the mod's own *Reminder notifications* setting instead.
 - *Sign out ...* in the popup removes that account's token and revokes it at Google.
 
 ## Implementation notes
