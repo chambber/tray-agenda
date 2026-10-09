@@ -2,8 +2,11 @@
 // @id              tray-agenda
 // @name            Tray Agenda
 // @description     Calendar agenda widget in the Windows 11 tray (Google Calendar accounts and ICS feeds) with native reminder notifications.
-// @version         0.4.0
-// @author          Windhawk community
+// @version         1.0.0
+// @author          Rubens Nascimento
+// @github          https://github.com/chambber
+// @homepage        https://github.com/chambber/tray-agenda
+// @license         MIT
 // @include         explorer.exe
 // @compilerOptions -lruntimeobject -luuid -luser32 -lwindowsapp -lshell32 -lwinhttp -lbcrypt -lcrypt32 -lws2_32 -ladvapi32 -lole32
 // ==/WindhawkMod==
