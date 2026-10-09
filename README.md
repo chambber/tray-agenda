@@ -3,6 +3,10 @@
 A calendar agenda widget for the Windows 11 system tray, built as a single-file
 [Windhawk](https://windhawk.net) mod. No helper program is needed.
 
+![Tray widget](docs/widget.png)
+
+![Popup agenda](docs/popup.png)
+
 - Tray widget with the current or next meeting. An event starting within the reminder lead
   time takes over from the one in progress; out-of-office events never win over an
   overlapping regular event.
