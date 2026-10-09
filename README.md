@@ -58,8 +58,11 @@ not supported. Feed URLs are stored as plain text in Windhawk's settings, so tre
   with DPAPI for your Windows account and stored in Windhawk's mod storage.
 - The client secret is stored in Windhawk's settings like any other setting; for a Desktop-app client it is
   not a confidential secret.
-- Traffic goes to Google and to the ICS hosts you configure, over HTTPS only. Meeting links are shown only
-  if they match a strict allowlist (Google Meet, `zoom.us`, Microsoft Teams).
+- Traffic goes to Google and to the ICS feed URLs you configure, over HTTPS only (up to 4 redirects are
+  followed, which may lead to other HTTPS hosts). Nothing is sent until you configure an OAuth client and
+  sign in, or add an ICS URL. Meeting links are shown only if they match a strict allowlist (Google Meet,
+  `zoom.us`, Microsoft Teams).
+- Reminders are shown through File Explorer's notification entry, so the mod writes nothing to the registry.
 - *Sign out ...* in the popup removes that account's token and revokes it at Google.
 
 ## Implementation notes

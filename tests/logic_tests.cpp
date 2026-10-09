@@ -136,6 +136,22 @@ int main() {
         CHECK(e.meetingProvider == L"zoom" && e.googleMeetCode.empty() && e.responseState == AgendaEntry::ResponseState::Accepted);
     }
 
+    // --- own events without guests, declined events
+    {
+        const char* own = R"({"summary":"Focus","organizer":{"self":true},"start":{"dateTime":"2026-10-09T14:00:00-03:00"},"end":{"dateTime":"2026-10-09T15:00:00-03:00"}})";
+        const char* other = R"({"summary":"Team holiday party","organizer":{"self":false},"start":{"dateTime":"2026-10-09T14:00:00-03:00"},"end":{"dateTime":"2026-10-09T15:00:00-03:00"}})";
+        JsonObject o1{nullptr}, o2{nullptr};
+        AgendaEntry e1, e2;
+        CHECK(ParseJsonObject(own, &o1) && GoogleItemToEntry(o1, L"Work", L"cal", T, &e1));
+        CHECK(e1.responseState == AgendaEntry::ResponseState::Accepted);
+        CHECK(ParseJsonObject(other, &o2) && GoogleItemToEntry(o2, L"Shared", L"cal", T, &e2));
+        CHECK(e2.responseState == AgendaEntry::ResponseState::Neutral);
+        std::vector<AgendaEntry> a = {Ev(L"Declined", T, T + 3600, false, AgendaEntry::ResponseState::Declined), Ev(L"Kept", T - 600, T + 3600)};
+        AgendaEntry out;
+        CHECK(SelectWidgetEntry(a, T, 600, &out) && out.title == L"Kept");
+        std::vector<AgendaEntry> only = {Ev(L"Declined", T, T + 3600, false, AgendaEntry::ResponseState::Declined)};
+        CHECK(!SelectWidgetEntry(only, T, 600, &out));
+    }
     // --- ICS feeds
     {
         auto ics = [](const std::string& body) {
