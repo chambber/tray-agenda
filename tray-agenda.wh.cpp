@@ -556,15 +556,16 @@ SolidColorBrush MakeBrush(winrt::Windows::UI::Color color) {
 }
 
 winrt::Windows::UI::Color ThemeForegroundColor() {
-    try {
-        // The taskbar follows the Windows mode, while UISettings reflects the app mode, so ask
-        // the widget's own XAML tree when it exists.
-        if (g_agendaGrid) {
-            return g_agendaGrid.ActualTheme() == ElementTheme::Dark
-                       ? winrt::Windows::UI::Color{255, 255, 255, 255}
-                       : winrt::Windows::UI::Color{255, 0, 0, 0};
-        }
-    } catch (...) {
+    // The taskbar follows the Windows mode (SystemUsesLightTheme), which is independent from
+    // the app mode that UISettings and the XAML ActualTheme reflect.
+    DWORD usesLight = 0;
+    DWORD size = sizeof(usesLight);
+    if (RegGetValueW(HKEY_CURRENT_USER,
+                     L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                     L"SystemUsesLightTheme", RRF_RT_REG_DWORD, nullptr, &usesLight,
+                     &size) == ERROR_SUCCESS) {
+        return usesLight ? winrt::Windows::UI::Color{255, 0, 0, 0}
+                         : winrt::Windows::UI::Color{255, 255, 255, 255};
     }
     try {
         winrt::Windows::UI::ViewManagement::UISettings uiSettings;
