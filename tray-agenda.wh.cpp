@@ -108,6 +108,13 @@ other setting, so treat them as secrets.
   is shown on the primary taskbar only.
 - Taskbar XAML-root and tray insertion strategy is adapted from Salyts' MIT-licensed
   Taskbar Fluent Media Player Windhawk mod.
+
+## Contributing and issues
+
+Found a bug, have an idea, or want to contribute? Open an issue or a pull request on
+[GitHub](https://github.com/chambber/tray-agenda). When reporting a problem, please include your
+Windows build, the Windhawk version and the mod log output (with any account details removed).
+You can also find me at [github.com/chambber](https://github.com/chambber).
 */
 // ==/WindhawkModReadme==
 

@@ -85,6 +85,13 @@ compiler and runs the pure logic: RFC 3339 parsing, PKCE (RFC 7636 vector), DPAP
 widget selection, reminder windows, Google event mapping and ICS parsing (with the real Windows time zone
 APIs). It does not exercise the network, the taskbar XAML or toast delivery; check those manually in Windhawk.
 
+## Contributing and issues
+
+Found a bug, have an idea, or want to contribute? Open an issue or a pull request on
+[GitHub](https://github.com/chambber/tray-agenda). When reporting a problem, please include your
+Windows build, the Windhawk version and the mod log output (with any account details removed).
+You can also find me at [github.com/chambber](https://github.com/chambber).
+
 ## License
 
 [MIT](LICENSE). Third-party attributions are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
